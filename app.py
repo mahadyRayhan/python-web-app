@@ -19,8 +19,7 @@ CORS(app)
 
 ######## Preparing the Classifier
 cur_dir = os.path.dirname(__file__)
-clf = pickle.load(open(os.path.join(cur_dir,
-                 'pkl_objects/classifier.pkl'), 'rb'))
+clf = pickle.load(open(os.path.join(cur_dir,'pkl_objects/classifier.pkl'), 'rb'))
 db = os.path.join(cur_dir, 'reviews.sqlite')
 
 books = [{
@@ -45,15 +44,12 @@ def train(document, y):
 def sqlite_entry(path, document, y):
     conn = sqlite3.connect(path)
     c = conn.cursor()
-    c.execute("INSERT INTO review_db (review, sentiment, date)"
-    " VALUES (?, ?, DATETIME('now'))", (document, y))
+    c.execute("INSERT INTO review_db (review, sentiment, date)"" VALUES (?, ?, DATETIME('now'))", (document, y))
     conn.commit()
     conn.close()
 
 class ReviewForm(Form):
-    moviereview = TextAreaField('',
-                                [validators.DataRequired(),
-                                validators.length(min=15)])
+    moviereview = TextAreaField('',[validators.DataRequired(),validators.length(min=15)])
 
 @app.route('/')
 def index():
